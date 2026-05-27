@@ -1,13 +1,42 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sigat</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIGAT</title>
+</head>
+
+<body class="min-h-screen bg-blue-300 flex items-center justify-center px-4">
+  <div class="w-full max-w-md rounded-xl bg-white p-8 shadow-xl">
+    <img src="./src/assets/sigatLogo.jpeg" alt="Logotipo da empresa" class="p-10">
+    <h1 class="text-center text-2xl font-bold text-slate-800">Login</h1>
+    <p class="p-4 text-center text-slate-500">Digite seu E-mail e senha</p>
+
+    <form id="login-form">
+      <label class="mb-2 mt-4 block text-center text-slate-700">E-mail</label>
+      <input type="email" id="email" placeholder="email@dominio.com" required autofocus
+        class="w-full rounded-md border border-slate-500 p-2">
+
+      <label class="mb-2 mt-4 block text-center text-slate-700">Senha</label>
+      <input type="password" id="password" placeholder="******" required
+        class="w-full rounded-md border border-slate-500 p-2">
+
+      <button id="acessar" type="submit" class="mt-4 w-full rounded-md bg-black py-2 text-white hover:bg-blue-700">
+        Login
+      </button>
+    </form>
+
+    <div id="message" class="mt-4 hidden rounded-xl bg-red-100 p-2 text-center text-sm text-red-500"></div>
+
+    <p class="mt-6 text-center text-sm text-slate-700">
+      Novo usuário
+      <a href="./novo.html" class="font-semibold text-blue-600 hover:text-blue-800">Cadastre-se aqui</a>
+    </p>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
