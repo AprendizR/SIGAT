@@ -22,11 +22,11 @@ function mensagemErroCadastro(error) {
   const mensagem = String(error.message ?? '').toLowerCase();
 
   if (error.status === 429 || mensagem.includes('rate limit')) {
-    return 'Limite de envio de emails atingido. Aguarde alguns minutos e tente novamente, ou desative a confirmacao por email no Supabase durante os testes.';
+    return 'Limite de envio de e-mails atingido. Aguarde alguns minutos e tente novamente, ou desative a confirmação por e-mail no Supabase durante os testes.';
   }
 
   if (mensagem.includes('already registered') || mensagem.includes('already been registered')) {
-    return 'Este email ja esta cadastrado. Volte ao login para acessar sua conta.';
+    return 'Este e-mail já está cadastrado. Volte ao login para acessar sua conta.';
   }
 
   return `Erro: ${error.message}`;
@@ -40,7 +40,7 @@ cadastroForm.addEventListener('submit', async (event) => {event.preventDefault()
     messageDiv.classList.add('hidden')
 
     if (password !== confirmPassword){
-        monstrarMensagem('As senhas informadas não dão match');
+        monstrarMensagem('As senhas informadas não conferem.');
         return
     }
 
@@ -56,5 +56,5 @@ cadastroForm.addEventListener('submit', async (event) => {event.preventDefault()
     }
 
     cadastroForm.reset();
-    monstrarMensagem('Usuário cadastrado com sucesso, agora você já pode fazer o login', 'sucesso')
+    monstrarMensagem('Usuário cadastrado com sucesso. Agora você já pode fazer o login.', 'sucesso')
 })
