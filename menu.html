@@ -18,69 +18,87 @@
 
             <ul class="space-y-1 text-sm">
                 <li>
-                    <button type="button" id="inicio" data-view="inicio" class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
+                    <button type="button" id="inicio" data-view="inicio"
+                        class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
                         <span class="w-5 text-center">&#127968;</span>
                         <span>In&iacute;cio</span>
                     </button>
                 </li>
                 <li>
-                    <button type="button" id="cadastrar" data-view="cadastrar" class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
+                    <button type="button" id="cadastrar" data-view="cadastrar"
+                        class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
                         <span class="w-5 text-center">&#128187;</span>
                         <span>Cadastrar ativo</span>
                     </button>
                 </li>
                 <li>
-                    <button type="button" id="consultar" data-view="consulta" class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
+                    <button type="button" id="consultar" data-view="consulta"
+                        class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
                         <span class="w-5 text-center">&#128269;</span>
                         <span>Consulta</span>
                     </button>
                 </li>
                 <li>
-                    <button type="button" id="editar" data-view="editar" class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
+                    <button type="button" id="editar" data-view="editar"
+                        class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
                         <span class="w-5 text-center">&#9999;&#65039;</span>
                         <span>Editar ativo</span>
                     </button>
                 </li>
                 <li>
-                    <button type="button" id="excluir" data-view="excluir" class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
+                    <button type="button" id="excluir" data-view="excluir"
+                        class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
                         <span class="w-5 text-center">&#128465;&#65039;</span>
                         <span>Excluir ativo</span>
                     </button>
                 </li>
                 <li>
-                    <button type="button" id="cadastrarsoft" data-view="software" class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
+                    <button type="button" id="cadastrarsoft" data-view="software"
+                        class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
                         <span class="w-5 text-center">&#128421;&#65039;</span>
                         <span>Cadastrar software</span>
                     </button>
                 </li>
                 <li>
-                    <button type="button" id="associarsoft" data-view="associar" class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
+                    <button type="button" id="associarsoft" data-view="associar"
+                        class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
                         <span class="w-5 text-center">&#10133;</span>
                         <span>Associar software</span>
                     </button>
                 </li>
                 <li>
-                    <button type="button" id="gerenciar" data-view="licencas" class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
+                    <button type="button" id="gerenciar" data-view="licencas"
+                        class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
                         <span class="w-5 text-center">&#128737;&#65039;</span>
                         <span>Gerenciar licen&ccedil;as</span>
                     </button>
                 </li>
                 <li>
-                    <button type="button" id="vencimentos" data-view="vencimentos" class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
+                    <button type="button" id="vencimentos" data-view="vencimentos"
+                        class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
                         <span class="w-5 text-center">&#128467;&#65039;</span>
                         <span>Vencimentos</span>
                     </button>
                 </li>
                 <li>
-                    <button type="button" id="logs" data-view="logs" class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
+                    <button type="button" id="logs" data-view="logs"
+                        class="menu-button flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium hover:bg-slate-100">
                         <span class="w-5 text-center">&#128220;</span>
                         <span>Logs de auditoria</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" id="logout"
+                        class="flex w-full items-center gap-3 rounded-md px-3 py-2 text-left font-medium text-red-600 hover:bg-red-100">
+                        <span class="w-5 text-center">🚪</span>
+                        <span>Sair</span>
                     </button>
                 </li>
             </ul>
         </aside>
 
         <main id="conteudo" class="flex-1 bg-white p-6 md:p-8"></main>
+
     </div>
 
     <script type="module" src="/src/menu.js"></script>

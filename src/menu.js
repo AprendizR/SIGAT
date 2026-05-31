@@ -1,6 +1,16 @@
 import './style.css';
 import { supabase } from './supabase.js';
 
+async function validaSessao() {
+  const { data } = await supabase.auth.getSession();
+
+  if (!data.session) {
+    window.location.assign('./index.html');
+  }
+}
+
+await validaSessao();
+
 const conteudo = document.getElementById('conteudo');
 const menuButtons = document.querySelectorAll('.menu-button');
 const ATIVOS_TABLE = 'ativos';
@@ -1153,3 +1163,8 @@ menuButtons.forEach((button) => {
 });
 
 renderView('inicio');
+
+document.getElementById('logout')?.addEventListener('click', async () => {
+  await supabase.auth.signOut();
+  window.location.href = './index.html';
+});
