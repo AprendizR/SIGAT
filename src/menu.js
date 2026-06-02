@@ -264,6 +264,20 @@ function getFormValue(formData, field) {
   return String(formData.get(field) ?? '').trim();
 }
 
+function isLicencaAtiva(licenca) {
+  if (!licenca?.data_vencimento) {
+    return false;
+  }
+
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+
+  const vencimento = new Date(licenca.data_vencimento);
+  vencimento.setHours(0, 0, 0, 0);
+
+  return vencimento > hoje;
+}
+
 function getResponsibleName(user) {
   return user?.user_metadata?.name || user?.email || 'Usuário autenticado';
 }
@@ -694,7 +708,9 @@ async function renderAssociarSoftware() {
   if (licencasError) {
     licencaSelect.innerHTML = '<option value="">Erro ao carregar licenças</option>';
   } else {
-    const licencasDisponiveis = licencas.filter((licenca) => Number(licenca.em_uso ?? 0) < Number(licenca.quantidade ?? 0));
+    const licencasDisponiveis = licencas.filter((licenca) =>
+      Number(licenca.em_uso ?? 0) < Number(licenca.quantidade ?? 0) && isLicencaAtiva(licenca)
+    );
     licencaSelect.innerHTML = '<option value="">Selecione a licença</option>' + licencasDisponiveis
       .map((licenca) => `<option value="${licenca.id}">${escapeHtml(licenca.software)} ${licenca.chave ? `- ${escapeHtml(licenca.chave)}` : ''} (${Number(licenca.quantidade ?? 0) - Number(licenca.em_uso ?? 0)} disponível)</option>`)
       .join('');
@@ -725,6 +741,12 @@ async function renderAssociarSoftware() {
     if (Number(licencaSelecionada.em_uso ?? 0) >= Number(licencaSelecionada.quantidade ?? 0)) {
       message.className = 'mt-5 rounded-md bg-red-100 p-3 text-sm text-red-700';
       message.textContent = 'Esta licença não possui unidades disponíveis.';
+      return;
+    }
+
+    if (!isLicencaAtiva(licencaSelecionada)) {
+      message.className = 'mt-5 rounded-md bg-red-100 p-3 text-sm text-red-700';
+      message.textContent = 'Esta licença está expirada e não pode ser associada.';
       return;
     }
 
@@ -890,10 +912,13 @@ async function renderGerenciarLicencas() {
 
     const total = licencas.reduce((sum, licenca) => sum + Number(licenca.quantidade ?? 0), 0);
     const emUso = licencas.reduce((sum, licenca) => sum + Number(licenca.em_uso ?? 0), 0);
+    const disponiveis = licencas
+      .filter(isLicencaAtiva)
+      .reduce((sum, licenca) => sum + Math.max(Number(licenca.quantidade ?? 0) - Number(licenca.em_uso ?? 0), 0), 0);
 
     document.getElementById('total-licencas').textContent = String(total);
     document.getElementById('licencas-em-uso').textContent = String(emUso);
-    document.getElementById('licencas-disponiveis').textContent = String(Math.max(total - emUso, 0));
+    document.getElementById('licencas-disponiveis').textContent = String(Math.max(disponiveis, 0));
     body.innerHTML = renderLicencaRows(licencas);
   }
 
@@ -967,14 +992,17 @@ async function renderVencimentos() {
     return;
   }
 
-  body.innerHTML = vencimentos.map((licenca) => `
-    <tr class="border-b border-slate-100">
-      <td class="px-5 py-4 text-sm font-semibold">${escapeHtml(licenca.software)}</td>
-      <td class="px-5 py-4 text-sm text-slate-600">Licença</td>
-      <td class="px-5 py-4 text-sm text-slate-600">${escapeHtml(licenca.data_vencimento)}</td>
-      <td class="px-5 py-4 text-sm text-slate-600">Ativo</td>
-    </tr>
-  `).join('');
+  body.innerHTML = vencimentos.map((licenca) => {
+    const ativo = isLicencaAtiva(licenca);
+    return `
+      <tr class="border-b border-slate-100">
+        <td class="px-5 py-4 text-sm font-semibold">${escapeHtml(licenca.software)}</td>
+        <td class="px-5 py-4 text-sm text-slate-600">Licença</td>
+        <td class="px-5 py-4 text-sm text-slate-600">${escapeHtml(licenca.data_vencimento)}</td>
+        <td class="px-5 py-4 text-sm ${ativo ? 'text-emerald-700' : 'text-red-600'}">${ativo ? 'Ativo' : 'Inativo'}</td>
+      </tr>
+    `;
+  }).join('');
 }
 
 function renderLogs() {
